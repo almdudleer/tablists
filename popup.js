@@ -4,7 +4,7 @@ let openBtnPrefix = 'openButton-';
 let removeBtnPrefix = 'removeButton-';
 let tablist = document.getElementById('tablist');
 let lists;
-let clearTabs = false;
+let clearTabs = true;
 let presentNames = [];
 
 function updateLists(cllbck=()=>{}) {
@@ -84,10 +84,27 @@ function openList(name) {
         console.log(data.tablists);
         console.log(name);
 
-        let tabs = data.tablists[name]['tabs'];
-        for (let tab in tabs)
-            if (tabs.hasOwnProperty(tab))
-                chrome.tabs.create(shortenTab(tabs[tab]));
+        if (clearTabs) {
+            chrome.tabs.query({}, function (tabs) {
+                let tabIds = [];
+                for (let tab in tabs) {
+                    if (tabs.hasOwnProperty(tab))
+                        tabIds.push(tabs[tab].id);
+                }
+
+                let listTabs = data.tablists[name]['tabs'];
+                for (let tab in listTabs)
+                    if (listTabs.hasOwnProperty(tab))
+                        chrome.tabs.create(shortenTab(listTabs[tab]));
+
+                chrome.tabs.remove(tabIds);
+            });
+        } else {
+            let listTabs = data.tablists[name]['tabs'];
+            for (let tab in listTabs)
+                if (listTabs.hasOwnProperty(tab))
+                    chrome.tabs.create(shortenTab(listTabs[tab]));
+        }
     });
 }
 
@@ -101,5 +118,5 @@ function removeList(list) {
 addBtns();
 
 document.getElementById('submitNewList').addEventListener("click", saveNewList);
-document.getElementById('clearTabsCheck').value = clearTabs;
+document.getElementById('clearTabsCheck').checked = clearTabs;
 document.getElementById('clearTabsCheck').addEventListener("click", ()=>{clearTabs = !clearTabs});

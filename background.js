@@ -4,8 +4,21 @@
 
 'use strict';
 
-chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({tablists: {}}, function() {
-    console.log("Tablists array initialized.");
-  });
+chrome.runtime.onInstalled.addListener(function () {
+    chrome.storage.sync.set({
+        tablists: {
+            empty: {
+                name: "empty",
+                tabs: [{
+                    active: true,
+                    index: 0,
+                    pinned: false,
+                    selected: true,
+                    url: "chrome://newtab/"
+                }]
+            }
+        }
+    }, function () {
+        console.log("Tablists array initialized.");
+    });
 });

@@ -3,15 +3,18 @@
     <head>
         <style>
 
-            .flex {
-                display: flex;
+            .twocol {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-row-gap: 5px;
+                grid-column-gap: 3px;
             }
 
             .left-item {
                 width: 146px;
                 height: 18px;
-                padding: 5px 0 3px 0;
-                margin: 0 5px 0 0;
+                padding: 5px 0 3px 3px;
+                margin: 0;
             }
 
             button.left-item {
@@ -29,16 +32,16 @@
         <title>tab manager</title>
     </head>
     <body>
-        <div class="flex">
-            <label for="listNameInput"></label>
-            <input type="text" id="listNameInput" class="left-item">
+        <div class="twocol">
+            <input type="text" id="listNameInput" class="left-item"
+                   placeholder="New list name">
             <button id="submitNewList" class="right-item">+</button>
         </div>
         <hr>
-        <div id="tablist" class="flex"></div>
+        <div id="tablist" class="twocol"></div>
         <hr>
         <input type="checkbox" id="clearTabsCheck">
-        <label for="clearTabsCheck">Clear tabs</label>
+        <label for="clearTabsCheck">Close tabs</label>
         <script src="popup.js"></script>
     </body>
 </html>
