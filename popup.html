@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+    <head>
+        <style>
+
+            .flex {
+                display: flex;
+            }
+
+            .left-item {
+                width: 146px;
+                height: 18px;
+                padding: 5px 0 3px 0;
+                margin: 0 5px 0 0;
+            }
+
+            button.left-item {
+                width: 150px;
+                height: 30px;
+            }
+
+            .right-item {
+                height: 30px;
+                width: 30px;
+                padding: 0;
+            }
+
+        </style>
+        <title>tab manager</title>
+    </head>
     <body>
-        <input type="text" id="listNameInput">
-        <button id="submitNewList">Submit</button>
-        <div id="tablist">      
+        <div class="flex">
+            <label for="listNameInput"></label>
+            <input type="text" id="listNameInput" class="left-item">
+            <button id="submitNewList" class="right-item">+</button>
         </div>
+        <hr>
+        <div id="tablist" class="flex"></div>
+        <hr>
+        <input type="checkbox" id="clearTabsCheck">
+        <label for="clearTabsCheck">Clear tabs</label>
         <script src="popup.js"></script>
     </body>
 </html>
