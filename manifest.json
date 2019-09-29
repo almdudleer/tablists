@@ -1,7 +1,7 @@
   {
-    "name": "Tablists",
+    "name": "Context switcher",
     "version": "1.0",
-    "description": "Save tab lists.",
+    "description": "Switch tab lists quickly.",
     "permissions": [
 	"activeTab",
 	"storage",
